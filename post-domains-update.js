@@ -26,6 +26,7 @@
       break;
 
     case 'remove':
+      domain = db.domains.findOne(domain);
       db.domains.remove(domain);
 
       app.domains = app.domains.filter(function(domain) {
