@@ -6,12 +6,7 @@
       name = parsed[1],
       app = db.apps.findOne({name: name});
 
-  db.domains.remove({
-    _id: {
-      $in: app.domains
-    }
-  });
-  db.apps.remove({
-    _id: app._id
-  });
+  db.domains.remove({_id: {$in: app.domains}});
+  db.apps.remove(app);
+
 })();
