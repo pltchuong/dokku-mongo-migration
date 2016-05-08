@@ -3,14 +3,14 @@
 
   var url = 'apps.solutionsresource.com';
   var parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
-      app = db.apps.findOne({"name": parsed[1]}),
+      app = db.apps.findOne({name: parsed[1]}),
       subdomain = parsed[2],
       vhost = parsed[3],
       domain = {
         app: app._id,
-        hostname: vhost,
-        cname: subdomain,
-        kind: app,
+        hostname: subdomain + '.' + vhost,
+        cname: null,
+        kind: 'dokku',
         created_at: new Date(),
         updated_at: new Date(),
       };
