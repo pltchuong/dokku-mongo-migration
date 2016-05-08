@@ -1,3 +1,3 @@
 (function() {
-  printjson('docker-args-build ' + parameters);
+  // printjson('docker-args-build ' + parameters);
 })();

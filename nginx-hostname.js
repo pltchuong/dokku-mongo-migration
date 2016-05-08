@@ -1,3 +1,3 @@
 (function() {
-  printjson('nginx-hostname ' + parameters);
+  // printjson('nginx-hostname ' + parameters);
 })();
