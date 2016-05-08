@@ -1,6 +1,7 @@
 (function() {
   printjson('post-config-update ' + parameters);
 
+  var url = 'apps.solutionsresource.com';
   var parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
       app = db.apps.findOne({"name": parsed[1]}),
       command = parsed[2],
@@ -56,6 +57,8 @@
         });
         break;
     }
+
     db.apps.save(app);
+
   }
 })();
