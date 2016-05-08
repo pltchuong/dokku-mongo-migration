@@ -1,6 +1,5 @@
 (function() {
   printjson('post-domains-update ' + parameters);
-  printjson(process.env.DOKKU_MONGO_CONNECTION_HOST);
 
   var url = 'apps.solutionsresource.com';
   var parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
