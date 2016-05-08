@@ -7,6 +7,7 @@
       subdomain = parsed[2],
       vhost = parsed[3],
       domain = {
+        app: app._id,
         hostname: vhost,
         cname: subdomain,
         kind: app,
@@ -14,9 +15,10 @@
         updated_at: new Date(),
       };
 
-  app.domains = app.domains || [];
-  app.domains.push(domain);
+  db.domains.save(domain);
+  domain = db.domains.findOne(domain);
 
+  app.domains = [domain._id];
   db.apps.save(app);
 
 })();
