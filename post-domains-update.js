@@ -30,7 +30,10 @@
       domain = db.domains.findOne(domain);
       db.domains.remove(domain);
 
-      app.domains = db.domains.find({_id: {$in: app.domains}, hostname: {$ne: hostname}}, {});
+      app.domains = app.domains || [];
+      app.domains = app.domains.filter(function(domain) {
+        return domain != domain._id;
+      });
       db.apps.save(app);
       break;
 
