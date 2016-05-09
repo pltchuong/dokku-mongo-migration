@@ -28,16 +28,13 @@
 
     case 'remove':
       domain = db.domains.findOne({hostname: hostname});
+      db.domains.remove(domain);
 
       app.domains = app.domains || [];
       app.domains = app.domains.filter(function(tmp) {
-        printjson(tmp);
-        printjson(domain);
-        return tmp != domain._id;
+        return tmp.valueOf() != domain._id.valueOf();
       });
       db.apps.save(app);
-
-      db.domains.remove(domain);
       break;
 
     case 'clear':
