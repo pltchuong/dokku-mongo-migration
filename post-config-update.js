@@ -4,7 +4,7 @@
   var url = 'apps.solutionsresource.com';
   var parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
       name = parsed[1],
-      app = db.apps.findOne({name: name}).populate('domains'),
+      app = db.apps.findOne({name: name}),
       command = parsed[2],
       raw = parsed[3],
       parseUnsetConfigs = function (raw) {
