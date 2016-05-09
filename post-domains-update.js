@@ -21,6 +21,7 @@
       db.domains.save(domain);
       domain = db.domains.findOne(domain);
 
+      app.domains = app.domains || [];
       app.domains.push(domain._id);
       db.apps.save(app);
       break;
@@ -29,6 +30,7 @@
       domain = db.domains.findOne(domain);
       db.domains.remove(domain);
 
+      app.domains = app.domains || [];
       app.domains = app.domains.filter(function(domain) {
         return domain.hostname != hostname;
       });
