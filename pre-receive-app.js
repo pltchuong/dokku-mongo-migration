@@ -19,6 +19,6 @@
   build.created_at = now;
   build.updated_at = now;
 
-  app.builds.save(build);
+  db.builds.save(build);
 
 })();
