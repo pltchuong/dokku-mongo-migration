@@ -2,7 +2,8 @@
   printjson('post-config-update ' + parameters);
 
   var url = 'apps.solutionsresource.com';
-  var parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
+  var now = new Date(),
+      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
       name = parsed[1],
       app = db.apps.findOne({name: name}),
       command = parsed[2],
@@ -59,6 +60,7 @@
         break;
     }
 
+    app.updated_at = now;
     db.apps.save(app);
 
   }
