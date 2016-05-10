@@ -16,7 +16,7 @@
         updated_at: new Date(),
       };
 
-  db.domains.save(domain);
+  db.domains.update({ hostname: domain.hostname }, domain, { upsert: true });
   domain = db.domains.findOne(domain);
 
   app.domains = app.domains || [];
