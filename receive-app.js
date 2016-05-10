@@ -14,6 +14,6 @@
   build.status = 'succeeded';
   build.updated_at = now;
 
-  app.builds.save(build);
+  db.builds.save(build);
 
 })();
