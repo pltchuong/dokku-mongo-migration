@@ -16,11 +16,10 @@
         updated_at: new Date(),
       };
 
-  db.domains.update({ hostname: domain.hostname }, domain, { upsert: true });
+  db.domains.update({hostname: domain.hostname}, domain, {upsert: true});
   domain = db.domains.findOne(domain);
 
-  app.domains = app.domains || [];
-  app.domains.push(domain._id);
+  app.domains = app.domains || [domain._id];
   db.apps.save(app);
 
 })();
