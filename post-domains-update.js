@@ -21,7 +21,8 @@
       db.domains.save(domain);
       domain = db.domains.findOne(domain);
 
-      app.domains = app.domains || [domain._id];
+      app.domains = app.domains || [];
+      app.domains.push(domain._id);
       db.apps.save(app);
       break;
 
