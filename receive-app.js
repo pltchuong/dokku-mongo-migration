@@ -6,7 +6,7 @@
       parsed = parameters.match(/(.*)/),
       name = parsed[1],
       app = db.apps.findOne({name: name}),
-      build = db.apps.findOne({
+      build = db.builds.findOne({
         app: app._id,
         status: 'running'
       });
