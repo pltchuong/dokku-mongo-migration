@@ -37,7 +37,7 @@
     build = db.builds.findOne(build);
     build.updated_date = now;
     build.status = 'running';
-    build.output += trimBuffer(log);
+    build.output += trimBuffer(log) + "\n";
     db.builds.save(build);
   }
 })();
