@@ -1,7 +1,4 @@
 (function() {
-  printjson(uuid);
-  printjson(parameters);
-
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
       parsed = parameters.match(/([^\s]*)\s(.*)/),
