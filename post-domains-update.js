@@ -1,5 +1,4 @@
 (function() {
-  printjson(uuid);
   printjson('post-domains-update ' + parameters);
 
   var url = 'apps.solutionsresource.com';

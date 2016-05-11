@@ -6,7 +6,6 @@ source "$(dirname "$0")/common/config"
 UUID=$(uuidgen)
 
 exec() {
-  VARS="var parameters='$@';var uuid='$UUID';"
-  echo "$VARS"
+  local VARS="var parameters='$@';var uuid='$UUID';"
   mongo $DOKKU_MONGO_CONNECTION_HOST:$DOKKU_MONGO_CONNECTION_PORT/$DOKKU_MONGO_CONNECTION_NAME -u $DOKKU_MONGO_CONNECTION_USER -p $DOKKU_MONGO_CONNECTION_PASS --quiet --eval "$VARS" "${0}.js"
 }

@@ -1,4 +1,6 @@
 (function() {
+  printjson('logger ' + parameters);
+
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
       parsed = parameters.match(/([^\s]*)\s(.*)/),

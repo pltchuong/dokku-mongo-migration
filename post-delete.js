@@ -1,5 +1,4 @@
 (function() {
-  printjson(uuid);
   printjson('post-delete ' + parameters);
 
   var url = 'apps.solutionsresource.com';

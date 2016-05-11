@@ -1,5 +1,4 @@
 (function() {
-  printjson(uuid);
   printjson('post-create ' + parameters);
 
   var url = 'apps.solutionsresource.com';
