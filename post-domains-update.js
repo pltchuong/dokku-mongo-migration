@@ -1,4 +1,5 @@
 (function() {
+  printjson(uuid);
   printjson('post-domains-update ' + parameters);
 
   var url = 'apps.solutionsresource.com';
@@ -11,18 +12,20 @@
       cname = app.name + '.' + url,
       domain = {
         app: app._id,
-        hostname: hostname,
-        cname: cname,
-        kind: 'custom'
+        hostname: hostname ? hostname : cname,
+        cname: hostname ? cname : null,
+        kind: hostname ? 'custom' : 'dokku'
       };
 
   switch(action) {
     case 'add':
+      domain._id = uuid;
       domain.created_at = now;
       domain.updated_at = now;
       db.domains.save(domain);
       domain = db.domains.findOne(domain);
 
+      app.domains = app.domains || [];
       app.domains.push(domain._id);
       app.updated_at = now;
       db.apps.save(app);

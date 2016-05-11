@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
-source "$(dirname "$0")/functions"
+source "$(dirname "$0")/common/functions"
 
-UUID=$(uuidgen)
-
-VARS="var parameters='$@ $UUID *****start*****'"
-exec "$VARS" "${0##*/}"
-
-while read logline ; do
-  VARS="var parameters='$@ $UUID $logline'"
-  exec "$VARS" "${0##*/}"
+exec "$@ *****start*****"
+while read log ; do
+  exec "$@ $log"
 done
-
-VARS="var parameters='$@ $UUID *****end*****'"
-exec "$VARS" "${0##*/}"
+exec "$@ *****end*****"

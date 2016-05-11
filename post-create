@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
-source "$(dirname "$0")/functions"
+source "$(dirname "$0")/common/functions"
 
-VARS="var parameters='$@'"
-exec "$VARS" "${0##*/}"
+exec "$@"
+
+$(dirname "$0")/post-domain-update "$@" "add"

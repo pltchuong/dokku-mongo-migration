@@ -1,13 +1,13 @@
 (function() {
+  printjson(uuid);
   printjson(parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
+      parsed = parameters.match(/([^\s]*)\s(.*)/),
       name = parsed[1],
       app = db.apps.findOne({name: name}),
-      uuid = parsed[2],
-      log = parsed[3],
+      log = parsed[2],
       build = {
         _id: uuid,
         app: app._id

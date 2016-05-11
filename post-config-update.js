@@ -1,4 +1,5 @@
 (function() {
+  printjson(uuid);
   printjson('post-config-update ' + parameters);
 
   var url = 'apps.solutionsresource.com';
