@@ -5,4 +5,4 @@ source "$(dirname "$0")/common/functions"
 
 exec "$@"
 
-$(dirname "$0")/post-domain-update "$@" "add"
+$(dirname "$0")/post-domains-update "$@" "add"
