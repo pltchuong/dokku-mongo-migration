@@ -1,0 +1,11 @@
+dokku/plugins/git/commands
+  - git_build_app_repo $APP $REF
+  + git_build_app_repo $APP $REF | plugn trigger logger "$2"
+
+dokku/plugins/ps/subcommands/restart
+  - ps_restart_cmd "$@"
+  + ps_restart_cmd "$@" | plugn trigger logger "$2"
+
+dokku/plugins/ps/subcommands/rebuild
+  - ps_rebuild_cmd "$@"
+  + ps_rebuild_cmd "$@" | plugn trigger logger "$2"
