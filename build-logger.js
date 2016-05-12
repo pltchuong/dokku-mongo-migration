@@ -8,7 +8,7 @@
       app = db.apps.findOne({name: name}),
       uuid = parsed[2],
       type = parsed[3],
-      log = parsed[4],
+      log = parsed[4] || '',
       build = {
         _id: uuid,
         app: app._id
