@@ -3,7 +3,7 @@
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s([^\s]*)\s(.*)/),
+      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s([^\s]*)\s?(.*)?/),
       name = parsed[1],
       app = db.apps.findOne({name: name}),
       uuid = parsed[2],
