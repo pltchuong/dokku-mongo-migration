@@ -1,7 +1,9 @@
 dokku/plugins/git/commands
   - git_build_app_repo $APP $REF
-  + git_build_app_repo $APP $REF | plugn trigger logger "$2"
+  + UUID=$(uuidgen)
+  + (git_build_app_repo $APP $REF | plugn trigger build-logger "$2" "$UUID" "out") 3>&1 1>&2 2>&3 | plugn trigger build-logger "$2" "$UUID" "err"
 
 dokku/plugins/ps/subcommands/restart
   - ps_restart_cmd "$@"
-  + ps_restart_cmd "$@" | plugn trigger logger "$2"
+  + UUID=$(uuidgen)
+  + (ps_restart_cmd $APP $REF | plugn trigger build-logger "$2" "$UUID" "out") 3>&1 1>&2 2>&3 | plugn trigger build-logger "$2" "$UUID" "err"

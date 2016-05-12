@@ -3,7 +3,7 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
 source "$(dirname "$0")/common/config"
 
-UUID="${UUID:-$(uuidgen)}"
+UUID="$(uuidgen)"
 
 exec() {
   local PARAMS=$(echo $@ | sed 's/[\x01-\x1F\x7F]\[1G//g' | sed "s/'/\"/g")
