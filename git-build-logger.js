@@ -11,8 +11,7 @@
       log = parsed[4] || '',
       build = {
         _id: uuid,
-        app: app._id,
-        type: 'build'
+        app: app._id
       };
 
   if(log === '*****start*****') {
