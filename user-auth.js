@@ -22,7 +22,7 @@
     activity.user = user._id;
 
     if(app) {
-      if(app.permissions.indexOf(app._id) >= 0) {
+      if(user.permissions.indexOf(app._id) >= 0) {
         activity.app = app._id;
         db.activities.save(activity);
       } else {
