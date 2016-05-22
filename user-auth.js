@@ -8,7 +8,7 @@
       user = db.users.findOne({username: username}),
       command = parsed[3],
       name = parsed[4],
-      app = db.app.findOne({name: name}),
+      app = db.apps.findOne({name: name}),
       activity = {
         command: command,
         created_at: now,
