@@ -7,12 +7,12 @@
       username = parsed[2],
       user = db.users.findOne({username: username}),
       command = parsed[4],
-      name = parsed[5],
+      name = parsed[5] || null,
       app = db.apps.findOne({name: name}),
-      params = parsed[6],
+      params = parsed[6] || null,
       activity = {
         command: command,
-        params: params || null,
+        params: params,
         created_at: now,
         updated_at: now
       },
