@@ -22,7 +22,7 @@
     activity.user = user._id;
 
     if(app) {
-      if(app.collaborators.indexOf(user._id) >= 0) {
+      if(app.collaborators && app.collaborators.indexOf(user._id) >= 0) {
         activity.app = app._id;
         db.activities.save(activity);
       } else {
