@@ -3,10 +3,12 @@
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s(.*)/),
+      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s([^\s]*)\s?([^\s]*)?\s?(.*)?/),
       username = parsed[2],
-      command = parsed[3],
       user = db.users.findOne({username: username}),
+      command = parsed[3],
+      name = parsed[4],
+      app = db.app.findOne({name: name}),
       activity = {
         command: command,
         created_at: now,
@@ -16,6 +18,11 @@
 
   if(user) {
     activity.user = user._id;
+
+    if(app) {
+      activity.app = app._id;
+    }
+
     db.activities.save(activity);
   }
 
