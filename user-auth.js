@@ -12,7 +12,7 @@
       params = parsed[6],
       activity = {
         command: command,
-        params: params,
+        params: params || null,
         created_at: now,
         updated_at: now
       },
