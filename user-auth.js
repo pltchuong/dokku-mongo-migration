@@ -3,7 +3,7 @@
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s([^\s]*)(\s([^\s]*)\s?([^\s]*)?\s?(.*)?)/),
+      parsed = parameters.match(/([^\s]*)\s?([^\s]*)?(\s?([^\s]*)?\s?([^\s]*)?\s?(.*)?)/),
       username = parsed[2],
       user = db.users.findOne({username: username}),
       command = parsed[4],
