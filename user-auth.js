@@ -7,9 +7,9 @@
       username = parsed[2],
       user = db.users.findOne({username: username}),
       command = parsed[4],
-      params = parsed[5],
-      name = parsed[6],
+      name = parsed[5],
       app = db.apps.findOne({name: name}),
+      params = parsed[6],
       activity = {
         command: command,
         params: params,
