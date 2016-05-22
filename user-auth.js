@@ -18,23 +18,25 @@
       },
       exit = 0;
 
-  if(user) {
-    activity.user = user._id;
+  if(username !== 'default') {
+    if(user) {
+      activity.user = user._id;
 
-    if(app) {
-      if(app.collaborators && app.collaborators.indexOf(user._id) >= 0) {
-        activity.app = app._id;
-        db.activities.save(activity);
-      } else {
-        exit = 1;
+      if(app) {
+        if(app.collaborators && app.collaborators.indexOf(user._id) >= 0) {
+          activity.app = app._id;
+          db.activities.save(activity);
+        } else {
+          exit = 1;
+        }
       }
     }
-  }
 
-  // denied if no user found in DB
-  // e.g user is created directly by sshcommand acl-user
-  else {
-    exit = 1;
+    // denied if no user found in DB
+    // e.g user is created directly by sshcommand acl-user
+    else {
+      exit = 1;
+    }
   }
 
   printjson(exit);
