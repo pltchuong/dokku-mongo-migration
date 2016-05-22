@@ -22,10 +22,13 @@
     activity.user = user._id;
 
     if(app) {
-      activity.app = app._id;
+      if(app.permissions.indexOf(app._id) >= 0) {
+        activity.app = app._id;
+        db.activities.save(activity);
+      } else {
+        exit = 1;
+      }
     }
-
-    db.activities.save(activity);
   }
 
   // denied if no user found in DB
