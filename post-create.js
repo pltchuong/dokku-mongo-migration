@@ -12,6 +12,7 @@
         name: name,
         web_url: name + '.' + url,
         git_url: 'dokku@' + url + ':' + name,
+        collaborators: db.users.find({role: 'administrator'}, {'_id': 1}),
         created_at: now,
         updated_at: now
       };
