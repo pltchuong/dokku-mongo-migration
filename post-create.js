@@ -12,11 +12,15 @@
         name: name,
         web_url: name + '.' + url,
         git_url: 'dokku@' + url + ':' + name,
-        collaborators: db.users.find({role: 'administrator'}, {'_id': 1}),
+        collaborators: [],
         created_at: now,
         updated_at: now
       };
 
+  var administrators = db.users.find({role: 'administrator'}, {'_id': 1});
+  administrators.forEach(function(administrator) {
+    app.collaborators.push(administrator._id);
+  });
   db.apps.save(app);
 
 })();
