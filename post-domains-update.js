@@ -18,35 +18,26 @@
 
   switch(action) {
     case 'add':
-      domain._id = uuid;
       domain.created_at = now;
       domain.updated_at = now;
-      db.domains.save(domain);
-      domain = db.domains.findOne(domain);
 
       app.domains = app.domains || [];
-      app.domains.push(domain._id);
+      app.domains.push(domain);
       app.updated_at = now;
       db.apps.save(app);
       break;
 
     case 'remove':
-      domain = db.domains.findOne(domain);
-      db.domains.remove(domain);
-
       app.domains = app.domains.filter(function(tmp) {
-        return tmp.valueOf() != domain._id.valueOf();
+        return tmp.hostname !== domain.hostname;
       });
       app.updated_at = now;
       db.apps.save(app);
       break;
 
     case 'clear':
-      db.domains.remove({_id: {$in: app.domains}, cname: {$ne: null}});
-
-      domain = db.domains.findOne({hostname: cname});
       app.domains = app.domains.filter(function(tmp) {
-        return tmp.valueOf() == domain._id.valueOf();
+        return tmp.cname === null;
       });
       app.updated_at = now;
       db.apps.save(app);
