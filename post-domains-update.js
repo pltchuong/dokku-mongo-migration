@@ -12,7 +12,6 @@
       hostname = parsed[3],
       cname = app.name + '.' + url,
       domain = {
-        app: app._id,
         hostname: hostname ? hostname : cname,
         cname: hostname ? cname : null,
         kind: hostname ? 'custom' : 'dokku'
