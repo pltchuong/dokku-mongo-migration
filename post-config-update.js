@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   printjson('post-config-update ' + parameters);
 
@@ -24,7 +26,7 @@
           } else {
             tmp += ' ' + config;
           }
-          if(i == raw.length - 1) {
+          if(i === raw.length - 1) {
             configs.push(tmp);
           }
         });
@@ -33,9 +35,10 @@
 
   if(app) {
     app.configs = app.configs || [];
+    var configs = false;
     switch(command) {
       case 'set':
-        var configs = parseSetConfigs(raw);
+        configs = parseSetConfigs(raw);
         configs.forEach(function(tmp) {
           var pair = tmp.split('=');
           var found = app.configs.filter(function(config) {
@@ -51,7 +54,7 @@
         });
         break;
       case 'unset':
-        var configs = parseUnsetConfigs(raw);
+        configs = parseUnsetConfigs(raw);
         app.configs = app.configs.filter(function(config) {
           for(var key in config) {
             return configs.indexOf(key) < 0;

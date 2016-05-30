@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   printjson('logger ' + parameters);
 
@@ -30,10 +32,10 @@
     build = db.builds.findOne(build);
     build.status = 'running';
     if(type === 'out') {
-      build.output += log + "\n";
+      build.output += log + '\n';
     }
     if(type === 'err') {
-      build.error += log + "\n";
+      build.error += log + '\n';
     }
     build.updated_date = now;
     db.builds.save(build);

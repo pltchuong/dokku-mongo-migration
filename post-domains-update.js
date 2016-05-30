@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
   printjson('post-domains-update ' + parameters);
 
