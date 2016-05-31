@@ -13,6 +13,7 @@
       app = db.apps.findOne({name: name}),
       params = parsed[6] || null,
       activity = {
+        _id: uuid,
         command: command,
         params: params,
         created_at: now,
