@@ -9,6 +9,8 @@
       name = parsed[1],
       app = db.apps.findOne({name: name});
 
-  db.apps.remove(app);
+  if(app) {
+    db.apps.remove(app);
+  }
 
 })();
