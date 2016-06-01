@@ -11,7 +11,7 @@
       command = parsed[4],
       name = parsed[5] || null,
       app = db.apps.findOne({name: name}),
-      params = parsed[6] || null,
+      params = parsed[6] || '',
       activity = db.activities.findOne({_id: uuid}),
       exit = 0;
 
