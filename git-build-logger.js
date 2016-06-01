@@ -17,15 +17,15 @@
       };
 
   if(log === '*****start*****') {
-    build.created_date = now;
-    build.updated_date = now;
+    build.created_at = now;
+    build.updated_at = now;
     build.status = 'started';
     build.output = '';
     build.error = '';
     db.builds.save(build);
   } else if(log === '*****end*****') {
     build = db.builds.findOne(build);
-    build.updated_date = now;
+    build.updated_at = now;
     build.status = build.error ? 'failed' : 'finished';
     db.builds.save(build);
   } else {
@@ -37,7 +37,7 @@
     if(type === 'err') {
       build.error += log + '\n';
     }
-    build.updated_date = now;
+    build.updated_at = now;
     db.builds.save(build);
   }
 })();
