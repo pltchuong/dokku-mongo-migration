@@ -20,7 +20,6 @@
 
       activity = activity || {
         _id: uuid,
-        status: 'started',
         output: '',
         user: user._id,
         created_at: now

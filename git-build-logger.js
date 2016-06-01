@@ -14,11 +14,12 @@
       activity = db.activities.findOne({_id: uuid});
 
   activity.updated_at = now;
-  if(log === '*****end*****') {
-    activity.status = 'running';
+  if(log === '*****start*****') {
+    activity.status = 'started';
   } else if(log === '*****end*****') {
     activity.status = activity.error ? 'failed' : 'finished';
   } else {
+    activity.status = 'running';
     if(type === 'out') {
       activity.output += log + '\n';
     }
