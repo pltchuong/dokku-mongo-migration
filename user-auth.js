@@ -12,7 +12,7 @@
       name = parsed[5] || null,
       app = db.apps.findOne({name: name}),
       params = parsed[6] || null,
-      activity = db.activities.findOne({_id: uuid});
+      activity = db.activities.findOne({_id: uuid}),
       exit = 0;
 
   if(username !== 'default') {
