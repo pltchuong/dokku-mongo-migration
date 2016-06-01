@@ -12,19 +12,22 @@
       name = parsed[5] || null,
       app = db.apps.findOne({name: name}),
       params = parsed[6] || null,
-      activity = {
-        _id: uuid,
-        command: command,
-        params: params,
-        created_at: now,
-        updated_at: now
-      },
+      activity = db.activities.findOne({_id: uuid});
       exit = 0;
 
   if(username !== 'default') {
     if(user) {
-      activity.user = user._id;
 
+      if(!activity) {
+        activity.status = 'started';
+        activity.output = '';
+        activity.user = user._id;
+        activity.created_at = now;
+      }
+
+      activity.output += command + ' ' + params + '\n';
+      activity.updated_at = now;
+      
       if(app) {
         if(app.collaborators && app.collaborators.indexOf(user._id) >= 0) {
           activity.app = app._id;
@@ -32,6 +35,8 @@
         } else {
           exit = 1;
         }
+      } else {
+        db.activities.save(activity);
       }
     }
 

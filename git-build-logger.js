@@ -11,33 +11,20 @@
       uuid = parsed[2],
       type = parsed[3],
       log = parsed[4] || '',
-      build = {
-        _id: uuid,
-        app: app._id
-      };
+      activity = db.activities.findOne({_id: uuid});
 
-  if(log === '*****start*****') {
-    build.created_at = now;
-    build.updated_at = now;
-    build.status = 'started';
-    build.output = '';
-    build.error = '';
-    db.builds.save(build);
+  activity.updated_at = now;
+  if(log === '*****end*****') {
+    activity.status = 'running';
   } else if(log === '*****end*****') {
-    build = db.builds.findOne(build);
-    build.updated_at = now;
-    build.status = build.error ? 'failed' : 'finished';
-    db.builds.save(build);
+    activity.status = activity.error ? 'failed' : 'finished';
   } else {
-    build = db.builds.findOne(build);
-    build.status = 'running';
     if(type === 'out') {
-      build.output += log + '\n';
+      activity.output += log + '\n';
     }
     if(type === 'err') {
-      build.error += log + '\n';
+      activity.error += log + '\n';
     }
-    build.updated_at = now;
-    db.builds.save(build);
   }
+  db.activities.save(activity);
 })();

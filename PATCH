@@ -1,4 +1,6 @@
-dokku/plugins/git/commands
+/usr/local/bin/dokku
+  + export UUID=${UUID:=$(uuidgen)}
+
+/var/lib/dokku/core-plugins/available/git/commands
   - git_build_app_repo $APP $REF
-  + UUID=$(uuidgen)
   + (git_build_app_repo $APP $REF | plugn trigger git-build-logger "$2" "$UUID" "out") 3>&2 2>&1 1>&3 | plugn trigger git-build-logger "$2" "$UUID" "err"
