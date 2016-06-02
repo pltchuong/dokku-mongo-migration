@@ -20,7 +20,7 @@
     activity.status = activity.error ? 'failed' : 'finished';
   } else {
 
-    printjson(type + ' === ' + log);
+    printjson(log);
 
     activity.status = 'running';
     if(type === 'out') {
