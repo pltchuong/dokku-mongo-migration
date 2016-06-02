@@ -1,4 +1,4 @@
 /usr/local/bin/dokku
   + export UUID=${UUID:=$(uuidgen)}
   - execute_dokku_cmd
-  + (execute_dokku_cmd "$@" | plugn trigger git-build-logger "$2" "$UUID" "out") 3>&2 2>&1 1>&3 | plugn trigger git-build-logger "$2" "$UUID" "err"
+  + execute_dokku_cmd "$@" | tee >(plugn trigger git-build-logger "$UUID" "out" >& /dev/null 3>&2 2>&1 1>&3 | plugn trigger git-build-logger "$UUID" "err" >& /dev/null)

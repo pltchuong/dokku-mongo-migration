@@ -15,7 +15,7 @@
   if(log === '*****start*****') {
     activity.status = 'started';
   } else if(log === '*****end*****') {
-    activity.status = activity.output.indexOf('remote rejected') >= 0 ? 'failed' : 'finished';
+    activity.status = activity.output.indexOf('pre-receive hook declined') >= 0 ? 'failed' : 'finished';
   } else {
     activity.status = 'running';
     activity.output += log + '\n';
