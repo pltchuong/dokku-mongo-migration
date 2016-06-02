@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  printjson('logger ' + parameters);
+  // printjson('logger ' + parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
@@ -19,6 +19,9 @@
   } else if(log === '*****end*****') {
     activity.status = activity.error ? 'failed' : 'finished';
   } else {
+
+    printjson(log);
+
     activity.status = 'running';
     if(type === 'out') {
       activity.output += log + '\n';
