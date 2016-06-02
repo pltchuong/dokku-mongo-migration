@@ -15,28 +15,13 @@
       activity = db.activities.findOne({_id: uuid}),
       exit = 0;
 
+  // check permission
   if(username !== 'default') {
     if(user) {
 
-      activity = activity || {
-        _id: uuid,
-        output: '',
-        user: user._id,
-        created_at: now
-      };
-
-      activity.output += command + ' ' + params + '\n';
-      activity.updated_at = now;
-      
-      if(app) {
-        if(app.collaborators && app.collaborators.indexOf(user._id) >= 0) {
-          activity.app = app._id;
-          db.activities.save(activity);
-        } else {
-          exit = 1;
-        }
-      } else {
-        db.activities.save(activity);
+      // denied if user don't have app's permission
+      if(app && app.collaborators && app.collaborators.indexOf(user._id) < 0) {
+        exit = 1;
       }
     }
 
@@ -47,5 +32,19 @@
     }
   }
 
+  // record ALL activities
+  activity = activity || {
+    _id: uuid,
+    output: '',
+    app: app._id || null,
+    user: user._id || username || 'Dokku',
+    created_at: now
+  };
+
+  activity.output += command + ' ' + params + '\n';
+  activity.updated_at = now;
+  db.activities.save(activity);
+
+  // return exit
   printjson(exit);
 })();
