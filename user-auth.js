@@ -36,9 +36,8 @@
   activity = activity || {
     _id: uuid,
     output: '',
-    error: '',
-    app: app._id || null,
-    user: user._id || username || 'Dokku',
+    app: app ? app._id : null,
+    user: user ? user._id : (username || 'Dokku'),
     created_at: now
   };
 
