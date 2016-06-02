@@ -1,14 +1,13 @@
 'use strict';
 
 (function() {
-  // printjson('logger ' + parameters);
+  printjson('logger ' + parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s?(.*)?/),
+      parsed = parameters.match(/([^\s]*)\s?(.*)?/),
       uuid = parsed[1],
-      type = parsed[2],
-      log = parsed[3] || '',
+      log = parsed[2] || '',
       activity = db.activities.findOne({_id: uuid});
 
   activity.updated_at = now;
