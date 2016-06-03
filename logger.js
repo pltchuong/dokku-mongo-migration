@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  printjson('logger ' + parameters);
+  // printjson('logger ' + parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
@@ -17,7 +17,9 @@
     activity.status = activity.output.indexOf('pre-receive hook declined') >= 0 ? 'failed' : 'finished';
   } else {
     activity.status = 'running';
-    activity.output += log + '\n';
+    if(activity.output.substring(activity.output.lastIndexOf('\n') + 1) !== log) {
+      activity.output = activity.output.trim() +'\n' + log;
+    }
   }
   db.activities.save(activity);
 })();
