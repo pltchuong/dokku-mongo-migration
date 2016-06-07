@@ -17,8 +17,8 @@
     activity.status = activity.output.indexOf('pre-receive hook declined') >= 0 ? 'failed' : 'finished';
   } else {
     activity.status = 'running';
-    if(activity.output.substring(activity.output.lastIndexOf('\n') + 1) !== log) {
-      activity.output = activity.output.trim() +'\n' + log;
+    if(activity.output.indexOf(log) < 0) {
+      activity.output = activity.output.trim() + '\n' + log + '\n';
     }
   }
   db.activities.save(activity);
