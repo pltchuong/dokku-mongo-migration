@@ -10,16 +10,20 @@
       log = parsed[2] || '',
       activity = db.activities.findOne({_id: uuid});
 
+  log = log.replace(/[ ]*\^\[\[1G/g, '');
+  log = log.replace(/00[0-9a-z]{2,}\^[A-Z]/g, '');
+
+  activity.status = 'started';
   activity.updated_at = now;
-  if(log === '*****start*****') {
-    activity.status = 'started';
-  } else if(log === '*****end*****') {
-    activity.status = activity.output.indexOf('pre-receive hook declined') >= 0 ? 'failed' : 'finished';
+  if(activity.output.indexOf(log) < 0) {
+    activity.output += log + '\n';
+  }
+  if(activity.output.indexOf('pre-receive hook declined') >= 0) {
+    activity.status = 'failed';
+  } else if(activity.output.indexOf('Application deployed') >= 0) {
+    activity.status = 'finished';
   } else {
     activity.status = 'running';
-    if(activity.output.indexOf(log) < 0) {
-      activity.output = activity.output.trim() + '\n' + log + '\n';
-    }
   }
   db.activities.save(activity);
 })();
