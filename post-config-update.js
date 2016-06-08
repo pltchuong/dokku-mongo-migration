@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  printjson('post-config-update ' + parameters);
+  // printjson('post-config-update ' + parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),

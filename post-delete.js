@@ -1,7 +1,7 @@
 'use strict';
 
 (function() {
-  printjson('post-delete ' + parameters);
+  // printjson('post-delete ' + parameters);
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
