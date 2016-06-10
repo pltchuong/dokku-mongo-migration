@@ -1,3 +1,5 @@
 /usr/local/bin/dokku
   + export UUID=${UUID:=$(uuidgen)}
+  + export DK_BASHPID=${DK_BASHPID:=$BASHPID}
+  + export DK_PPID=$PPID
   + execute_dokku_cmd "$@" | tee >(cat -v | plugn trigger logger "$UUID")
