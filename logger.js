@@ -15,8 +15,10 @@
 
   activity.status = 'started';
   activity.updated_at = now;
-  if(activity.output.indexOf(log) < 0) {
+  if(activity.output.indexOf(log.trim()) < 0) {
     activity.output += log + '\n';
+  } else {
+    activity.output.replace(log.trim(), log);
   }
   if(activity.output.indexOf('pre-receive hook declined') >= 0) {
     activity.status = 'failed';
