@@ -35,13 +35,12 @@
   // record ALL activities
   activity = activity || {
     _id: uuid,
-    output: '',
+    output: (command + ' ' + params + '\n'),
     app: app ? app._id : null,
     user: user ? user._id : (username || 'Dokku'),
     created_at: now
   };
 
-  activity.output += command + ' ' + params + '\n';
   activity.updated_at = now;
   db.activities.save(activity);
 
