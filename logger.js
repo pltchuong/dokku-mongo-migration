@@ -13,10 +13,10 @@
   log = log.replace(/[ ]*\^\[\[1G/g, '');
   log = log.replace(/00[0-9a-z]{2,}\^[A-Z]/g, '');
 
-  if(type == 'out') {
+  if(type === 'out') {
     activity.stdout += log + '\n';
   }
-  if(type == 'err') {
+  if(type === 'err') {
     activity.stderr += log + '\n';
   }
 
@@ -31,6 +31,5 @@
   }
 
   activity.updated_at = now;
-
   db.activities.save(activity);
 })();
