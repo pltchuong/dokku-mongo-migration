@@ -35,7 +35,9 @@
   // record ALL activities
   activity = activity || {
     _id: uuid,
-    output: (command + ' ' + params + '\n'),
+    command: (command + ' ' + params + '\n'),
+    stdout: '',
+    stderr: '',
     app: app ? app._id : null,
     user: user ? user._id : (username || 'Dokku'),
     created_at: now

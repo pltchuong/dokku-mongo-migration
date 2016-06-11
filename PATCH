@@ -2,4 +2,12 @@
   + export UUID=${UUID:=$(uuidgen)}
   + export DK_BASHPID=${DK_BASHPID:=$BASHPID}
   + export DK_PPID=$PPID
-  + execute_dokku_cmd "$@" 2>&1 | tee >(cat -v | plugn trigger logger)
+  + 
+  + export GE_BASHPID=${DK_BASHPID:=$BASHPID}
+  + export GE_DD=${DK_DD:=$$}
+  + export GE_PPID=${GE_PPID:=$PPID}
+  + export PA_BASHPID=$BASHPID
+  + export PA_DD=$$
+  + export PA_PPID=$PPID
+
+  + execute_dokku_cmd "$@" > >(tee >(cat -v | plugn trigger logger "out")) 2> >(tee >(cat -v | plugn trigger logger "err"))
