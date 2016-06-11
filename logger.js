@@ -6,8 +6,8 @@
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
       parsed = parameters.match(/([^\s]*)\s?(.*)?/),
-      type = parsed[0],
-      log = parsed[1] || '',
+      type = parsed[1],
+      log = parsed[2] || '',
       activity = db.activities.findOne({_id: uuid});
 
   log = log.replace(/[ ]*\^\[\[1G/g, '');
