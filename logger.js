@@ -1,10 +1,14 @@
 'use strict';
 
-function wierdStringToByteArray(string) {
-  var pattern = /^(M-\^?[a-zA-Z]?)(M-\^?[a-zA-Z]?)(M-\^?[a-zA-Z]?)$/;
-  var weirds = pattern.exec(string);
-  var bytes = [wierdStringToByte(weirds[1]), wierdStringToByte(weirds[2]), wierdStringToByte(weirds[3])];
-  return utf8BytesToString(bytes);
+function count(string, m) {
+  return string.split(m).length - 1;
+}
+
+function indexOf(string, m, i) {
+  if(i > count(string, m)) {
+    return undefined;
+  }
+  return string.split(m, i === 0 ? 1 : i).join(m).length;
 }
 
 function wierdStringToByte(weird) {
@@ -18,8 +22,8 @@ function wierdStringToByte(weird) {
   }
 }
 
-/* jshint ignore:start */
 function utf8BytesToString(bytes) {
+  /* jshint ignore:start */
   var out = [], pos = 0, c = 0;
   while (pos < bytes.length) {
     var c1 = bytes[pos++];
@@ -42,8 +46,32 @@ function utf8BytesToString(bytes) {
     }
   }
   return out.join('');
+  /* jshint ignore:end */
 }
-/* jshint ignore:end */
+
+function wierdStringToBytes(string) {
+  var pattern = /(M-[^\s]*)/g;
+  var weirds;
+  var tmp = string;
+  while((weirds = pattern.exec(string)) !== null) {
+    for(var i = 3; i <= count(weirds[0], '-'); i = i + 3) {
+      var first = indexOf(weirds[0], '-', i - 2) - 1;
+      var last = indexOf(weirds[0], '-', i) + 1;
+      var next = indexOf(weirds[0], '-', i + 1);
+      next = next ? (next - 1) : undefined;
+
+      var subweirds = weirds[0].substring(first, next);
+      var subpattern = /(M-\^?.?)(M-\^?.?)(M-\^?.?)/g;
+      var subweird;
+      while((subweird = subpattern.exec(subweirds)) !== null) {
+        var bytes = [wierdStringToByte(subweird[1]), wierdStringToByte(subweird[2]), wierdStringToByte(subweird[3])];
+        tmp = tmp.replace(subweird[1] + subweird[2] + subweird[3], utf8BytesToString(bytes));
+      }
+    }
+  }
+
+  return tmp;
+}
 
 (function() {
   // printjson('logger ' + parameters);
@@ -55,9 +83,10 @@ function utf8BytesToString(bytes) {
       log = parsed[2] || '',
       activity = db.activities.findOne({_id: uuid});
 
+  log = log.replace(/[ \t]+----->/g, '----->');
   log = log.replace(/\^\[\[\d{1,}\w/g, '');
   log = log.replace(/00[0-9a-z]{2,}\^[A-Z]/g, '');
-  log = wierdStringToByteArray(log);
+  log = wierdStringToBytes(log);
 
   if(type === 'out') {
     activity.stdout += log + '\n';
