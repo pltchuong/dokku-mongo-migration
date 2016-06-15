@@ -9,7 +9,3 @@ while read -r log ; do
     exec "$@ $log"
   fi
 done
-
-if [ "$DK_BASHPID" = "$DK_PPID"  ]; then
-  exec "system *****end*****"
-fi

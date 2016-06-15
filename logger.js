@@ -96,7 +96,7 @@ function wierdStringToBytes(string) {
     activity.stderr += log + '\n';
   }
 
-  if(activity.stdout.includes('*****end*****')) {
+  if(log.includes('*****end*****')) {
     if(activity.stderr) {
       activity.status = 'failed';
     } else {
