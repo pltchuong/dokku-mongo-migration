@@ -83,8 +83,9 @@ function wierdStringToBytes(string) {
       log = parsed[2] || '',
       activity = db.activities.findOne({_id: uuid});
 
+  log = log.replace(/00[0-9a-z]{2}\^[A-Z]/g, '');
   log = log.replace(/\^\[\[\d{1,}\w/g, '');
-  log = log.replace(/00[0-9a-z]{2,}\^[A-Z]/g, '');
+  log = log.replace(/^0000/g, '');
   log = log.replace(/[ \t]+----->/g, '----->');
   log = wierdStringToBytes(log);
 
