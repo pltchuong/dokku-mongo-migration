@@ -4,7 +4,7 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 source "$(dirname "$0")/common/functions"
 
 IFS=''
-while read log ; do
+while read -r log ; do
   if [ "$DK_BASHPID" = "$DK_PPID"  ] || [ "$1" = "err" ]; then
     exec "$@ $log"
   fi
