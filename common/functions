@@ -4,13 +4,8 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 source "$(dirname "$0")/common/config"
 
 exec() {
-  local first=0
-  echo "$@" | sed "s/'/\\\'/g; s/\\\/\\\\\\\/g" | fold -w100000 | while read -r PARAMS; do
-    if [[ "$first" = 1 ]]; then
-      PARAMS="out $PARAMS"
-    fi
+  echo "$@" | sed "s/'/\\\'/g; s/\\\/\\\\\\\/g" | fold -w1000 | while read -r PARAMS; do
     local VARS="var parameters='$PARAMS';var uuid='$UUID';"
     mongo $DOKKU_MONGO_CONNECTION_HOST:$DOKKU_MONGO_CONNECTION_PORT/$DOKKU_MONGO_CONNECTION_NAME -u $DOKKU_MONGO_CONNECTION_USER -p $DOKKU_MONGO_CONNECTION_PASS --quiet --eval "$VARS" "${0}.js"
-    first=1
   done
 }
