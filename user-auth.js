@@ -35,7 +35,7 @@
   // record ALL activities
   activity = activity || {
     _id: uuid,
-    commands: [],
+    command: command + (params ? (' ' + params) : ''),
     stdout: '',
     stderr: '',
     app: app ? app._id : null,
@@ -43,7 +43,6 @@
     created_at: now
   };
 
-  activity.commands.push(command + ' ' + params);
   activity.updated_at = now;
   db.activities.save(activity);
 
