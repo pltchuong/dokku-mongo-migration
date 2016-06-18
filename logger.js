@@ -78,10 +78,21 @@ function wierdStringToBytes(string) {
 
   var url = 'apps.solutionsresource.com';
   var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s?(.*)?/),
+      parsed = parameters.match(/([^\s]*)\s([^\s]*)\s?(.*)?/),
       type = parsed[1],
-      log = parsed[2] || '',
+      pid = parsed[2],
+      log = parsed[3] || '',
       activity = db.activities.findOne({_id: uuid});
+
+  if(activity.pid) {
+    if(pid == activity.pid) {
+      // do nothing, continue as usual
+    } else {
+      return;
+    }
+  } else {
+    activity.pid = pid;
+  }
 
   log = log.replace(/00[0-9a-z]{2}\^[A-Z]/g, '');
   log = log.replace(/\^\[\[\d{1,}\w/g, '');
