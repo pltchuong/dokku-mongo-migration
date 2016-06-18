@@ -1,14 +1,5 @@
 /usr/local/bin/dokku
   + export UUID=${UUID:=$(uuidgen)}
-  + export DK_BASHPID=${DK_BASHPID:=$BASHPID}
-  + export DK_PPID=$PPID
-  + 
-  + export GE_BASHPID=${DK_BASHPID:=$BASHPID}
-  + export GE_DD=${DK_DD:=$$}
-  + export GE_PPID=${GE_PPID:=$PPID}
-  + export PA_BASHPID=$BASHPID
-  + export PA_DD=$$
-  + export PA_PPID=$PPID
   +
   + i=-1;while((++i<33));
   + do
