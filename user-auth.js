@@ -1,9 +1,7 @@
 'use strict';
 
 (function() {
-  // printjson('user-auth ' + parameters);
 
-  var url = 'apps.solutionsresource.com';
   var now = new Date(),
       parsed = parameters.match(/([^\s]*)\s?([^\s]*)?(\s?([^\s]*)?\s?([^\s]*)?\s?(.*)?)/),
       username = parsed[2],

@@ -1,9 +1,7 @@
 'use strict';
 
 (function() {
-  // printjson('post-create ' + parameters);
 
-  var url = 'apps.solutionsresource.com';
   var now = new Date(),
       parsed = parameters.match(/(.*)/),
       name = parsed[1],
