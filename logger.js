@@ -85,7 +85,7 @@ function wierdStringToBytes(string) {
       activity = db.activities.findOne({_id: uuid});
 
   if(activity.pid) {
-    if(pid == activity.pid) {
+    if(pid === activity.pid) {
       // do nothing, continue as usual
     } else {
       return;
