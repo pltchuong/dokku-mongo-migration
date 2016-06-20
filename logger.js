@@ -82,14 +82,18 @@ function wierdStringToBytes(string) {
       log = parsed[3] || '',
       activity = db.activities.findOne({_id: uuid});
 
-  if(activity.pid) {
-    if(pid === activity.pid) {
-      // do nothing, continue as usual
-    } else {
-      return;
-    }
+  if(log.includes('*****end*****')) {
+    // do nothing, continue as usual
   } else {
-    activity.pid = pid;
+    if(activity.pid) {
+      if(pid === activity.pid) {
+        // do nothing, continue as usual
+      } else {
+        return;
+      }
+    } else {
+      activity.pid = pid;
+    }
   }
 
   log = log.replace(/00[0-9a-z]{2}\^[A-Z]/g, '');
