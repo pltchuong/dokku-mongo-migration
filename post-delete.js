@@ -8,6 +8,7 @@
       app = db.apps.findOne({name: name});
 
   if(app) {
+    db.activities.remove({app: app._id});
     db.apps.remove(app);
   }
 
