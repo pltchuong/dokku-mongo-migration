@@ -2,8 +2,7 @@
 
 (function() {
 
-  var now = new Date(),
-      parsed = parameters.match(/([^\s]*)\s?([^\s]*)?/),
+  var parsed = parameters.match(/([^\s]*)\s?([^\s]*)?/),
       name = parsed[1],
       app = db.apps.findOne({name: name});
 

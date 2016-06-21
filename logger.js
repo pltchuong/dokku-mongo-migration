@@ -23,30 +23,32 @@ function wierdStringToByte(weird) {
 }
 
 function utf8BytesToString(bytes) {
-  /* jshint ignore:start */
   var out = [], pos = 0, c = 0;
   while (pos < bytes.length) {
-    var c1 = bytes[pos++];
+    var c1 = bytes[pos++],
+        c2 = false,
+        c3 = false,
+        c4 = false,
+        u = false;
     if (c1 < 128) {
       out[c++] = String.fromCharCode(c1);
     } else if (c1 > 191 && c1 < 224) {
-      var c2 = bytes[pos++];
+      c2 = bytes[pos++];
       out[c++] = String.fromCharCode((c1 & 31) << 6 | c2 & 63);
     } else if (c1 > 239 && c1 < 365) {
-      var c2 = bytes[pos++];
-      var c3 = bytes[pos++];
-      var c4 = bytes[pos++];
-      var u = ((c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63) - 0x10000;
+      c2 = bytes[pos++];
+      c3 = bytes[pos++];
+      c4 = bytes[pos++];
+      u = ((c1 & 7) << 18 | (c2 & 63) << 12 | (c3 & 63) << 6 | c4 & 63) - 0x10000;
       out[c++] = String.fromCharCode(0xD800 + (u >> 10));
       out[c++] = String.fromCharCode(0xDC00 + (u & 1023));
     } else {
-      var c2 = bytes[pos++];
-      var c3 = bytes[pos++];
+      c2 = bytes[pos++];
+      c3 = bytes[pos++];
       out[c++] = String.fromCharCode((c1 & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
     }
   }
   return out.join('');
-  /* jshint ignore:end */
 }
 
 function wierdStringToBytes(string) {
@@ -56,7 +58,6 @@ function wierdStringToBytes(string) {
   while((weirds = pattern.exec(string)) !== null) {
     for(var i = 3; i <= count(weirds[0], '-'); i = i + 3) {
       var first = indexOf(weirds[0], '-', i - 2) - 1;
-      var last = indexOf(weirds[0], '-', i) + 1;
       var next = indexOf(weirds[0], '-', i + 1);
       next = next ? (next - 1) : undefined;
 
